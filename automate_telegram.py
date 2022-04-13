@@ -11,9 +11,26 @@ all_stock_codes = nse.get_stock_codes()
 dynamic_dict = {}
 for code, name in all_stock_codes.items():
     dynamic_dict[name.lower().replace(' ','_')] = code
+
+
+from decouple import config
+
+
+API_KEY = config('KEY')
+
 # print(dynamic_dict)
+import os
+PORT = int(os.environ.get('PORT', 5000))
 
 
+print(API_KEY)
+import logging
+# Enable logging
+logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
+                    level=logging.INFO)
+
+logger = logging.getLogger(__name__)
+TOKEN = 'YOURTELEGRAMBOTTOKEN'
 def predict_buy_sel_one_day(codes):
     recommandations = {}
     for code in codes:
@@ -62,11 +79,15 @@ def parse_msg(update, context):
 # def get_daily_updates():
 
 def main():
-    updater = Updater('5114313901:AAHVPAjF-rez-7hC4BNy2ds9u71vc4qIHqo', use_context=True)
+    updater = Updater(API_KEY, use_context=True)
     dp = updater.dispatcher
     dp.add_handler(CommandHandler('quote',quote))
     dp.add_handler(MessageHandler(Filters.text, parse_msg))    
-    updater.start_polling()
+    # updater.start_polling()
+    updater.start_webhook(listen="0.0.0.0",
+                          port=int(PORT),
+                          url_path=API_KEY)
+    updater.bot.setWebhook('https://billatrader.herokuapp.com/' + API_KEY)
     updater.idle()
 
 if __name__ == '__main__':
