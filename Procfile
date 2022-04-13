@@ -1,1 +1,1 @@
-web: python3 automate_telegram.py
+web: python automate_telegram.py
