@@ -43,7 +43,6 @@ def predict_buy_sel_one_day(codes):
         )
         if scrip.get_analysis().summary:
             recommandations[code] = scrip.get_analysis().summary["RECOMMENDATION"]
-            print(scrip.get_analysis().summary)
     return recommandations
 
 
@@ -72,7 +71,6 @@ def parse_msg(update, context):
         results = predict_buy_sel_one_day(matched_key)
         for code,result in results.items():
             msg = "For " + all_stock_codes[code] +' '+ result + ' is recommended(As per the daily chart pattern basis).'
-            print(chat_id)
             context.bot.send_message(text=msg,chat_id=chat_id)
             time.sleep(2)
 
