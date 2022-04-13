@@ -19,7 +19,7 @@ API_KEY = config('KEY')
 
 # print(dynamic_dict)
 import os
-PORT = int(os.environ.get('PORT', 5000))
+PORT = int(os.environ.get('PORT', '8443'))
 
 import logging
 # Enable logging
@@ -81,8 +81,9 @@ def main():
     # updater.start_polling()
     updater.start_webhook(listen="0.0.0.0",
                           port=int(PORT),
-                          url_path=API_KEY)
-    updater.bot.setWebhook('https://billatrader.herokuapp.com/' + API_KEY)
+                          url_path=API_KEY,
+                          webhook_url='https://billatrader.herokuapp.com/' + API_KEY)
+                          
     updater.idle()
 
 if __name__ == '__main__':
