@@ -1,5 +1,4 @@
-from unicodedata import name
-from unittest import result
+
 from telegram.ext import Updater, MessageHandler, CommandHandler, Filters
 from tradingview_ta import TA_Handler, Interval, Exchange
 import requests
@@ -22,15 +21,13 @@ API_KEY = config('KEY')
 import os
 PORT = int(os.environ.get('PORT', 5000))
 
-
-print(API_KEY)
 import logging
 # Enable logging
 logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
                     level=logging.INFO)
 
 logger = logging.getLogger(__name__)
-TOKEN = 'YOURTELEGRAMBOTTOKEN'
+
 def predict_buy_sel_one_day(codes):
     recommandations = {}
     for code in codes:
