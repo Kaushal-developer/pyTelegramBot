@@ -39,7 +39,7 @@ def main():
     updater.start_webhook(listen="0.0.0.0",
                           port=int(PORT),
                           url_path=API_KEY,
-                          webhook_url='https://billatrader.herokuapp.com/' + API_KEY)
+                          webhook_url='https://bigbullsindia.herokuapp.com/' + API_KEY)
                           
     updater.idle()
 
